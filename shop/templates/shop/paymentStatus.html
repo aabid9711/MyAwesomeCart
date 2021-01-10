@@ -1,0 +1,50 @@
+{% extends 'shop/basic.html' %}
+{% block title%} My Awesome Cart Tracker{% endblock %}
+
+
+{% block css %}
+body{
+font-family:italic;
+}
+
+img{
+   display : block;
+   margin : 100px auto;
+  height : 300px;
+
+ width : 360px;
+ margin-bottom:20px;
+}
+h2{
+ text-align: center;
+}
+h3{
+text-align: center;
+}
+
+{% endblock %}
+
+{% block body %}
+<!--    {{response}}-->
+    <div class="col my-4">
+
+        <h2>Payment status regarding your order Id {{response.ORDERID}}</h2>
+        {% if response.RESPCODE == '01' %}
+       <img src='/media/shop/images/payment-success.png' alt="...">
+        <h3>Your order has been placed successfully</h3>
+        <br><br>
+        <h3>Track your order with order id</h3>
+        <h3>Thanks!!!</h3>
+        {% else %}
+        ORDER FAILURE
+        {% endif%}
+
+    </div>
+
+{% endblock %}
+{% block js %}
+<script>
+
+    localStorage.clear();
+</script>
+{% endblock %}

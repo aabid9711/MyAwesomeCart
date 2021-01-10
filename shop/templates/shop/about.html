@@ -1,0 +1,121 @@
+{% extends 'shop/basic.html' %}
+
+{% block title%} About Us{% endblock %}
+
+{% block css %}
+body{
+ font-family:italic;
+}
+
+.clr{
+ background-color:black;
+}
+h1{
+
+ font-weight: bold;
+}
+
+ .col-lg-4 {
+    margin-bottom: 1.5rem;
+    text-align: center;
+background-color:#db9833;
+<!--color:white;-->
+    display:block;
+    width:100%;
+    margin:20px auto;
+}
+h2{
+font-family: Monospace;
+}
+
+.para{
+
+color:white;
+}
+.one{
+color:#2a6592;
+}
+.two{
+color:#db9833;
+}
+.three{
+color:red;
+}
+.ar1{
+color:yellow;
+}
+.ar2{
+color:blue;
+}
+.ar3{
+color:green;
+}
+p{
+font-size:20px;
+}
+{% endblock %}
+
+
+
+{% block body %}
+
+
+
+
+<main role="main">
+
+  <!-- Main jumbotron for a primary marketing message or call to action -->
+  <div class="jumbotron clr">
+    <div class="container">
+      <h1 class="display-3"><span class="one">My</span><span class="two">Awesome</span><span class="three">Cart</span><span class="ar1">!</span><span class="ar2">!</span><span class="ar3">!</span>  </h1>
+      <p class="para">My Awesome Cart Pvt Ltd. is an electronic commerce Website . Founded by <b>Aabid Hasan</b> in 2020 , The Main goal to create this website is to implement the various conceps of HTML , CSS , JS , JQUERY , BOOTSTRAP , PYTHON , DJANGO.<br>
+
+
+        It gives me the various challnegs to complete all of its task with full functionality such as
+
+        from payment gateway , add to cart the item remove the all items from the cart and track the item with its
+
+        order id.
+        so it has been my wonderful experience to work on django moving further i will be making some more projects on
+
+        django.<br>
+
+        it is the most powerfull framework , it gives so much functionlity e.g making the django admin (super user).
+
+        django also handle all of its file in a very compactful manner when we have to work to handle all the files is also a big challenge
+
+        but django doing it very efficiently all templates are contains html file all the views are one place and all the database handle by models
+
+        So it has been great feeling to complete the project with the full functionlity that an e commerce website ususlly have.
+
+      </p>
+<!--      <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more »</a></p>-->
+    </div>
+  </div>
+
+  <div class="container">
+
+<!--    -->
+
+    <div class="col-lg-4">
+
+<!--      <img src="/media/shop/images/my_photo.jpg">-->
+
+       <img background-color:blue src="/media/shop/images/my_photo.jpg" class="bd-placeholder-img rounded-circle" width="160" height="160" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"></rect><text x="50%" y="50%" fill="#777" dy=".3em"></text></img>
+        <h2>AABID HASAN</h2>
+        <p>Hello , I am AABID HASAN and i have created this site to get hands on practice on web developmet full functionality
+        from the frontend to the backend.I have make it only for my learning purpose.<br>
+          <span>Thanks a lot for visting</span>
+        </p>
+<!--        <p><a class="btn btn-secondary" href="#" role="button">View details »</a></p>-->
+      </div>
+
+  </div> <!-- /container -->
+
+</main>
+
+
+
+
+
+{% endblock %}

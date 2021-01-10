@@ -1,0 +1,142 @@
+{% extends 'shop/basic.html' %}
+
+{% block title %} Checkout -- My Awesome Cart{% endblock %}
+
+{% block css %}
+
+body{
+font-family:italic;
+}
+
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="col my-4 myc">
+        <h2>My Awesome Cart - Track Your Order, Enter order id and email id</h2>
+
+        <div class="col my-4">
+
+        <form method="post" action="#" id="trackerForm">{% csrf_token %}
+            <div class="form-row my-4">
+                <div class="form-group col-md-6">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" required id="email" name="email" placeholder="enter your mail id">
+                </div>
+
+                 <div class="form-group col-md-6">
+                    <label for="orderId">Order Id</label>
+                    <input type="text" class="form-control" required id="orderId" name="orderId" placeholder="enter your order id">
+                </div>
+
+            </div>
+
+            <button type="submit" class="btn btn-primary">Track Order</button>
+        </form>
+    </div>
+
+       <h2>Your Order Status : </h2>
+        <div>
+            <ul class="list-group my-4" id="items">
+              Enter your order id and email  and click track order to track of your order.
+            </ul>
+        </div>
+         <h2>Your Order Details : </h2>
+          <div>
+            <ul class="list-group my-4" id="citems">
+               your details will be shown here if order id and mail id is valid
+            </ul>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+
+{% block js %}
+
+<script>
+   $('#trackerForm').submit(function(event) {
+    $('#items').empty();
+    $('#citems').empty();
+    var formData = {
+        'orderId': $('input[name=orderId]').val(),
+        'email': $('input[name=email]').val(),
+        'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
+    };
+    $.ajax({
+            type: 'POST',
+            url: '/shop/tracker/',
+            data: formData,
+            encode: true
+        })
+
+        .done(function(data) {
+            console.log(data)
+            data = JSON.parse(data)
+            updates = data[0];
+            if (updates != undefined && updates != {}) {
+                for (i = 0; i < updates.length; i++) {
+                    let text = updates[i]['text'];
+                    let time = updates[i]['time'];
+                    mystr = `<li class="list-group-item d-flex justify-content-between align-items-center">
+                    ${text}
+                    <span class="badge badge-primary badge-pill">${time}</span>
+                </li>`
+                    $('#items').append(mystr);
+                }
+
+                cart = JSON.parse(data[1]);
+
+                 for(var items in cart){
+
+                  let name=cart[items][1];
+                  let qty=cart[items][0];
+
+                 mystr=`<li class="list-group-item d-flex justify-content-between align-items-center">
+                    ${name}
+                    <span class="badge badge-primary badge-pill">${qty}</span>
+                </li>`
+
+                 $('#citems').append(mystr);
+                }
+
+
+            }
+            else {
+                mystr = `<li class="list-group-item d-flex justify-content-between align-items-center">
+                    Sorry, We are not able to fetch this order id and email. Make sure to type correct order Id and email</li>`
+                $('#items').append(mystr);
+
+                 mystr = `<li class="list-group-item d-flex justify-content-between align-items-center">
+                    Sorry, We are not able to fetch this order id and email. Make sure to type correct order Id and email</li>`
+                $('#citems').append(mystr);
+           }
+
+
+
+      });
+
+      event.preventDefault();
+ });
+
+       if(localStorage.getItem('cart')==null){
+       var cart={};
+      }
+      else{
+      cart = JSON.parse(localStorage.getItem('cart'));
+      updateCart(cart);
+    }
+
+   function updateCart(cart)
+  {
+       var sum=0;
+       for (var item in cart) {
+         sum=sum+cart[item][0];
+        }
+        localStorage.setItem('cart',JSON.stringify(cart));
+       document.getElementById('cart').innerHTML=sum;
+   }
+
+
+</script>
+{% endblock %}
